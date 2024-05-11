@@ -22,7 +22,7 @@ def yield_dict_path_elms(obj, path=[]):
                 else:
                     # 通常の変数（ツリーの末端）の場合
                     yield path + [(key, value, DICT_LABEL)]
-    elif isinstance(obj, list):
+    elif isinstance(obj, (list, tuple)):
         # 入力の1次元目がリストの場合
         if obj == []:
             yield path + [('', [], LIST_LABEL)]
