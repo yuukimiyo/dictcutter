@@ -1,9 +1,8 @@
-import unittest
+import os, sys, unittest
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dictcutter')))
 
-import sys
-from pathlib import Path
-sys.path.append(str(Path(Path(__file__).parent / '../src/dictcutter').resolve()))
-from merge_dict_elms import merge_dict_elms
+import dictcutter
 
 class TestMergeDictElms(unittest.TestCase):
 
@@ -12,7 +11,7 @@ class TestMergeDictElms(unittest.TestCase):
         dict1 = {'key1': {'key1-1': 'key1-1v'}}
         dict2_elms = [('key1', 'key1v', 'd')]
         expected = {'key1': [{'key1-1': 'key1-1v'}, 'key1v']}
-        actual = merge_dict_elms(dict1, dict2_elms)
+        actual = dictcutter.merge_dict_elms(dict1, dict2_elms)
         self.assertEqual(expected, actual)
 
     def test_merge_multikeydict(self):
@@ -20,7 +19,7 @@ class TestMergeDictElms(unittest.TestCase):
         dict1 = {'key1': {'key1-1': 'key1-1v'}}
         dict2_elms = [('key1', '', 'd'), (0, '', 'l'), ('key1-2', 'key1-2v', 'd')]
         expected = {'key1': {'key1-1': 'key1-1v', 'key1-2': 'key1-2v'}}
-        actual = merge_dict_elms(dict1, dict2_elms)
+        actual = dictcutter.merge_dict_elms(dict1, dict2_elms)
         self.assertEqual(expected, actual)
 
     def test_merge_multidict(self):
@@ -28,7 +27,7 @@ class TestMergeDictElms(unittest.TestCase):
         dict1 = {'key1': {'key1-1': 'key1-1v'}}
         dict2_elms = [('key1', '', 'd'), (1, '', 'l'), ('key1-2', 'key1-2v', 'd')]
         expected = {'key1': [{'key1-1': 'key1-1v'}, {'key1-2': 'key1-2v'}]}
-        actual = merge_dict_elms(dict1, dict2_elms)
+        actual = dictcutter.merge_dict_elms(dict1, dict2_elms)
         self.assertEqual(expected, actual)
 
 if __name__ == "__main__":

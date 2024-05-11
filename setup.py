@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='dictcutter',
@@ -12,11 +12,13 @@ setup(
     url='https://github.com/yuukimiyo/dictcutter',
     license="MIT",
     keywords="dictionary",
-    packages=['dictcutter'],
+    packages=find_packages(exclude=["src.tests"]),
     package_dir={'': 'src'},
     install_requires=[],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
     ],
+    tests_require=[],
+    test_suite="src.tests",
 )
